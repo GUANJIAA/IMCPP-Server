@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package FriendProto;
+
+option cc_generic_services = true;
+
+message AdminInfo
+{
+    bytes Name = 1;
+    bytes Email = 2;
+    bytes Phone = 3;
+    bytes Desc = 4;
+    bytes DepartName = 5;
+    bytes Status = 6;
+}
+
+message ResultCode
+{
+    int32 errcode = 1;//成功返回0，失败返回1
+    bytes errmsg = 2;
+}
+
+message AddFriendRequest
+{
+    bytes adminName = 1;
+    bytes peerName = 2;
+}
+
+message AddFriendResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message GetFriendRequest
+{
+    bytes adminName = 1;
+}
+
+message GetFriendResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+    repeated AdminInfo Data = 3;
+}
+
+message DelFriendRequest
+{
+    bytes adminName = 1;
+    bytes peerName = 2;
+}
+
+message DelFriendResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+service FriendServiceRpc
+{
+    rpc AddFriend(AddFriendRequest)returns(AddFriendResponse);
+    rpc GetFriend(GetFriendRequest)returns(GetFriendResponse);
+    rpc DelFriend(DelFriendRequest)returns(DelFriendResponse);
+}
+

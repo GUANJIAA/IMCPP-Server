@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package DepartProto;
+
+option cc_generic_services = true;
+
+message DepartUser
+{
+    bytes userName = 1;
+    bytes userEmail = 2;
+    bytes userPhone = 3;
+    bytes userRole = 4;
+}
+
+message DepartInfo
+{
+    int32 departId = 1;
+    bytes departName = 2;
+    bytes departDesc = 3;
+    repeated DepartUser departUsers = 4;
+}
+
+message ResultCode
+{
+    int32 errcode = 1;
+    bytes errmsg = 2;
+}
+
+message CreateDepartRequest
+{
+    DepartInfo depart = 1;
+}
+
+message CreateDepartResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message DelDepartRequest
+{
+    bytes departName = 1;
+    bytes userName = 2;
+}
+
+message DelDepartResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message AddDepartRequest
+{
+    bytes userName = 1;
+    bytes departName = 2;
+    bytes userRole = 3;
+}
+
+message AddDepartResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message QuitDepartRequest
+{
+    bytes departName = 1;
+    bytes userName = 2;
+}
+
+message QuitDepartResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message QueryDepartRequest
+{
+    bytes userName = 1;
+}
+
+message QueryDepartResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+    DepartInfo departs = 3;
+}
+
+message QueryDepartUsersRequest
+{
+    bytes userName = 1;
+    bytes departName = 2;
+}
+
+message QueryDepartUsersResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+    repeated bytes departUserName = 3;
+}
+
+service DepartServiceRpc
+{
+    rpc CreateDepart(CreateDepartRequest)returns(CreateDepartResponse);
+    rpc DelDepart(DelDepartRequest)returns(DelDepartResponse);
+    rpc AddDepart(AddDepartRequest)returns(AddDepartResponse);
+    rpc QuitDepart(QuitDepartRequest)returns(QuitDepartResponse);
+    rpc QueryDepart(QueryDepartRequest)returns(QueryDepartResponse);
+    rpc QueryDepartUsers(QueryDepartUsersRequest)returns(QueryDepartUsersResponse);
+}

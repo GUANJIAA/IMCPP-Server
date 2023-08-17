@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package UserMsgProto;
+
+option cc_generic_services = true;
+
+message UserInfo
+{
+    int32 id = 1;
+    bytes name = 2;
+    bytes pwd = 3;
+    bytes email = 4;
+    bytes phone = 5;
+    bytes desc = 6;
+    bytes departName = 7;
+}
+
+message ResultCode
+{
+    int32 errcode = 1;
+    bytes errmsg = 2;
+}
+
+message QueryUserMsgRequest
+{
+    bytes name = 1;
+}
+
+message QueryUserMsgResponse
+{
+    ResultCode result = 1;
+    UserInfo userMsg = 2;
+}
+
+message UpdateUserMsgRequest
+{
+    UserInfo userMsg = 1; 
+}
+
+message UpdateUserMsgResponse
+{
+    ResultCode result = 1;
+}
+
+service UserMsgServiceRpc
+{
+    rpc QueryUserMsg(QueryUserMsgRequest)returns(QueryUserMsgResponse);
+    rpc UpdateUserMsg(UpdateUserMsgRequest)returns(UpdateUserMsgResponse);
+}

@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package LoginProto;
+
+option cc_generic_services = true;
+
+
+message ResultCode
+{
+    int32 errcode = 1;//成功返回0，失败返回1
+    bytes errmsg = 2;
+}
+
+message LoginRequest
+{
+    bytes name = 1;
+    bytes pwd = 2;
+}
+
+message LoginResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+    bytes MsgServerIP = 3;
+    bytes MsgServerPort = 4;
+}
+
+message LogoutRequest
+{
+    bytes name = 1;
+}
+
+message LogoutResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message RegisterRequest
+{
+    uint32 id = 1;
+    bytes name = 2;
+    bytes pwd = 3;
+    bytes email = 4;
+    bytes Phone = 5;
+}
+
+message RegisterResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message RetrieveRequest
+{
+    bytes name = 1;
+    bytes pwd = 2;
+    bytes email = 3;
+    bytes Phone = 4;
+}
+
+message RetrieveResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+service UserServiceRpc
+{
+    rpc Login(LoginRequest)returns(LoginResponse);
+    rpc Logout(LogoutRequest)returns(LogoutResponse);
+    rpc Register(RegisterRequest)returns(RegisterResponse);
+    rpc Retrieve(RetrieveRequest)returns(RetrieveResponse);
+}

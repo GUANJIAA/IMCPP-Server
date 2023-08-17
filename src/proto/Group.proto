@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package GroupProto;
+
+option cc_generic_services = true;
+
+message GroupUser
+{
+    bytes userName = 1;
+    bytes userEmail = 2;
+    bytes userPhone = 3;
+    bytes userRole = 4;
+}
+
+message GroupInfo
+{
+    int32 groupId = 1;
+    bytes groupName = 2;
+    bytes groupDesc = 3;
+    repeated GroupUser groupUsers = 4;
+}
+
+message ResultCode
+{
+    int32 errcode = 1;
+    bytes errmsg = 2;
+}
+
+message CreateGroupRequest
+{
+    GroupInfo group = 1;
+}
+
+message CreateGroupResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message AddGroupRequest
+{
+    bytes userName = 1;
+    bytes groupName = 2;
+    bytes userRole = 3;
+}
+
+message AddGroupResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message QuitGroupRequest
+{
+    bytes userName = 1;
+    bytes groupName = 2;
+}
+
+message QuitGroupResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message QueryGroupRequest
+{
+    bytes userName = 1;
+}
+
+message QueryGroupResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+    repeated GroupInfo groups = 3;
+}
+
+message QueryGroupUsersRequest
+{
+    bytes userName = 1;
+    bytes groupName = 2;
+}
+
+message QueryGroupUsersResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+    repeated GroupUser groupUser = 3;
+}
+
+service GroupServiceRpc
+{
+    rpc CreateGroup(CreateGroupRequest)returns(CreateGroupResponse);
+    rpc AddGroup(AddGroupRequest)returns(AddGroupResponse);
+    rpc QuitGroup(QuitGroupRequest)returns(QuitGroupResponse);
+    rpc QueryGroup(QueryGroupRequest)returns(QueryGroupResponse);
+    rpc QueryGroupUsers(QueryGroupUsersRequest)returns(QueryGroupUsersResponse);
+}

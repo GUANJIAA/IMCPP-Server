@@ -1,0 +1,152 @@
+syntax = "proto3";
+
+package OfflineMessageProto;
+
+option cc_generic_services = true;
+
+message ResultCode
+{
+    int32 errcode = 1;//成功返回0，失败返回1
+    bytes errmsg = 2;
+}
+
+message msg
+{
+    int32 msgid = 1;
+    bytes recvname = 2;
+    bytes sendname = 3;
+    bytes message = 4;
+}
+
+message addOfflineMsgRequest
+{
+    msg OfflineMsg = 1;
+}
+
+message addOfflineMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message delOfflineMsgRequest
+{
+    msg OfflineMsg = 1;
+}
+
+message delOfflineMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message queryOfflineMsgRequest
+{
+    bytes recvname = 1;
+}
+
+message queryOfflineMsgResponse
+{
+    repeated msg OfflineMsg = 1;
+    ResultCode result = 2;
+    bool success = 3;
+}
+
+message groupMsg
+{
+    int32 msgid = 1;
+    bytes groupname = 2;
+    bytes sendname = 3;
+    bytes message = 4;
+}
+
+message addOfflineGroupMsgRequest
+{
+    groupMsg OfflineGroupMsg = 1;
+}
+
+message addOfflineGroupMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message delOfflineGroupMsgRequest
+{
+    groupMsg OfflineGroupMsg = 1;
+}
+
+message delOfflineGroupMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message queryOfflineGroupMsgRequest
+{
+    bytes username = 1;
+}
+
+message queryOfflineGroupMsgResponse
+{
+    repeated groupMsg OfflineGroupMsg = 1;
+    ResultCode result = 2;
+    bool success = 3;
+}
+
+message departMsg
+{
+    int32 msgid = 1;
+    bytes departname = 2;
+    bytes sendname = 3;
+    bytes message = 4;
+}
+
+message addOfflineDepartMsgRequest
+{
+    departMsg OfflineDepartMsg = 1;
+}
+
+message addOfflineDepartMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message delOfflineDepartMsgRequest
+{
+    departMsg OfflineDepartMsg = 1;
+}
+
+message delOfflineDepartMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message queryOfflineDepartMsgRequest
+{
+    bytes username = 1;
+}
+
+message queryOfflineDepartMsgResponse
+{
+    repeated departMsg OfflineDepartMsg = 1;
+    ResultCode result = 2;
+    bool success = 3;
+}
+
+service offlineMsgRpc
+{
+    rpc AddOfflineMsg(addOfflineMsgRequest)returns(addOfflineMsgResponse);
+    rpc DelOfflineMsg(delOfflineMsgRequest)returns(delOfflineMsgResponse);
+    rpc QueryOfflineMsg(queryOfflineMsgRequest)returns(queryOfflineMsgResponse);
+
+    rpc AddOfflineGroupMsg(addOfflineGroupMsgRequest)returns(addOfflineGroupMsgResponse);
+    rpc DelOfflineGroupMsg(delOfflineGroupMsgRequest)returns(delOfflineGroupMsgResponse);
+    rpc QueryOfflineGroupMsg(queryOfflineGroupMsgRequest)returns(queryOfflineGroupMsgResponse);
+
+    rpc AddOfflineDepartMsg(addOfflineDepartMsgRequest)returns(addOfflineDepartMsgResponse);
+    rpc DelOfflineDepartMsg(delOfflineDepartMsgRequest)returns(delOfflineDepartMsgResponse);
+    rpc QueryOfflineDepartMsg(queryOfflineDepartMsgRequest)returns(queryOfflineDepartMsgResponse);
+}

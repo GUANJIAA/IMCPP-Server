@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package ChatMessageProto;
+
+option cc_generic_services = true;
+
+message ResultCode
+{
+    int32 errcode = 1;//成功返回0，失败返回1
+    bytes errmsg = 2;
+}
+
+message chatMsg
+{
+    int32 msgid = 1;
+    bytes recvname = 2;
+    bytes sendname = 3;
+    bytes message = 4;
+    bytes isRead = 5;
+}
+
+message addMsgRequest
+{
+    chatMsg Msg = 1;
+}
+
+message addMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message delMsgRequest
+{
+    chatMsg Msg = 1;
+}
+
+message delMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message queryMsgRequest
+{
+    bytes recvname = 1;
+    bytes sendname = 2;
+}
+
+message queryMsgResponse
+{
+    repeated chatMsg Msg = 1;
+    ResultCode result = 2;
+    bool success = 3;
+}
+
+message groupChatMsg
+{
+    int32 msgid = 1;
+    bytes groupname = 2;
+    bytes sendname = 3;
+    bytes message = 4;
+}
+
+message addGroupMsgRequest
+{
+    groupChatMsg GroupMsg = 1;
+}
+
+message addGroupMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message delGroupMsgRequest
+{
+    groupChatMsg GroupMsg = 1;
+}
+
+message delGroupMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message queryGroupMsgRequest
+{
+    bytes username = 1;
+}
+
+message queryGroupMsgResponse
+{
+    repeated groupChatMsg GroupMsg = 1;
+    ResultCode result = 2;
+    bool success = 3;
+}
+
+message departChatMsg
+{
+    int32 msgid = 1;
+    bytes departname = 2;
+    bytes sendname = 3;
+    bytes message = 4;
+}
+
+message addDepartMsgRequest
+{
+    departChatMsg DepartMsg = 1;
+}
+
+message addDepartMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message delDepartMsgRequest
+{
+    departChatMsg DepartMsg = 1;
+}
+
+message delDepartMsgResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+message queryDepartMsgRequest
+{
+    bytes username = 1;
+}
+
+message queryDepartMsgResponse
+{
+    repeated departChatMsg DepartMsg = 1;
+    ResultCode result = 2;
+    bool success = 3;
+}
+
+message queryOfflineMsgRequest
+{
+    bytes recvname = 1;
+}
+
+message queryOfflineMsgResponse
+{
+    repeated chatMsg Msg = 1;
+    ResultCode result = 2;
+    bool success = 3;
+}
+
+service chatMsgRpc
+{
+    rpc AddChatMsg(addMsgRequest)returns(addMsgResponse);
+    rpc DelChatMsg(delMsgRequest)returns(delMsgResponse);
+    rpc QueryChatMsg(queryMsgRequest)returns(queryMsgResponse);
+    rpc QueryOfflineMsg(queryOfflineMsgRequest)returns(queryOfflineMsgResponse);
+
+    rpc AddGroupChatMsg(addGroupMsgRequest)returns(addGroupMsgResponse);
+    rpc DelGroupChatMsg(delGroupMsgRequest)returns(delGroupMsgResponse);
+    rpc QueryGroupChatMsg(queryGroupMsgRequest)returns(queryGroupMsgResponse);
+
+    rpc AddDepartChatMsg(addDepartMsgRequest)returns(addDepartMsgResponse);
+    rpc DelDepartChatMsg(delDepartMsgRequest)returns(delDepartMsgResponse);
+    rpc QueryDepartChatMsg(queryDepartMsgRequest)returns(queryDepartMsgResponse);
+}
