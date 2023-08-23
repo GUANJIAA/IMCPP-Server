@@ -52,12 +52,12 @@ make
 
 ### 数据同步架构
 
-![数据同步](C:\Users\27836\Desktop\IMCPP\DataSyncService)
+![数据同步](./pix/DataSynService.png)
 
 ### 服务器架构
 
-![Server](C:\Users\27836\Desktop\IMCPP\Server.png)
+![Server](./pix/Server.png)
 
 ### 客户端架构
 
-![client](C:\Users\27836\Desktop\IMCPP\client.png)
+![client](./pix/client.png)
