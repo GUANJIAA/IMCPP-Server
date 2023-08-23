@@ -52,7 +52,7 @@ make
 
 ### 数据同步架构
 
-![数据同步](./pix/DataSynService.png)
+![数据同步](./pix/DataSyncService.png)
 
 ### 服务器架构
 
