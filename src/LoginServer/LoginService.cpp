@@ -230,7 +230,7 @@ void LoginService::Login(::google::protobuf::RpcController *controller,
     bool login_result = Login(name, pwd, code);
 
     response->set_success(login_result);
-    response->set_msgserverip("192.168.61.100");
+    response->set_msgserverip("81.71.97.27");
     response->set_msgserverport("9001");
 
     done->Run();
